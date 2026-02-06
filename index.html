@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Happy Rose Day ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+      font-family: 'Arial', sans-serif;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 350px;
+      z-index: 2;
+      position: relative;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: crimson;
+      min-height: 30px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.5;
+      display: none;
+    }
+
+    button {
+      margin-top: 20px;
+      background: crimson;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #heart {
+      display: none;
+      color: crimson;
+      font-size: 40px;
+      margin-top: 10px;
+      animation: heartbeat 1s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    .rose {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      0% { top: -50px; opacity: 1; }
+      100% { top: 110vh; opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h2 id="name"></h2>
+    <p id="message">
+      Every day with you feels like a garden in full bloom.<br>
+      You are my joy, my heart, my everything.<br>
+      <b>Happy Rose Day ❤️</b>
+    </p>
+    <button onclick="showLove()">Click for your rose 🌹</button>
+    <div id="heart">❤️</div>
+  </div>
+
+  <script>
+    const herName = "[Deepika]"; // Replace with her name
+    const nameElement = document.getElementById('name');
+    const message = document.getElementById('message');
+    const heart = document.getElementById('heart');
+
+    function typeName(index = 0) {
+      if(index < herName.length){
+        nameElement.textContent += herName[index];
+        setTimeout(() => typeName(index+1), 150);
+      }
+    }
+
+    function createRose() {
+      const rose = document.createElement('div');
+      rose.classList.add('rose');
+      rose.textContent = "🌹";
+      rose.style.left = Math.random() * window.innerWidth + "px";
+      rose.style.animationDuration = (3 + Math.random() * 2) + "s";
+      document.body.appendChild(rose);
+      setTimeout(() => rose.remove(), 5000);
+    }
+
+    function showLove() {
+      typeName();
+      message.style.display = 'block';
+      heart.style.display = 'block';
+      // Generate roses every 300ms for 3 seconds
+      let count = 0;
+      const roseInterval = setInterval(() => {
+        createRose();
+        count++;
+        if(count > 10) clearInterval(roseInterval);
+      }, 300);
+    }
+  </script>
+
+</body>
+  </html>
